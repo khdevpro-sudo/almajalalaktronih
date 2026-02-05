@@ -1,0 +1,23 @@
+name: Build Android APK
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Build Process
+        run: |
+          npm install @capacitor/cli @capacitor/core @capacitor/android
+          mkdir -p www && cp -r . www || true
+          npx cap init "MyApp" "com.example.app" --web-dir www
+          npx cap add android
+          cd android && chmod +x gradlew && ./gradlew assembleDebug
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: my-app-bundle
+          path: android/app/build/outputs/apk/debug/app-debug.apk
