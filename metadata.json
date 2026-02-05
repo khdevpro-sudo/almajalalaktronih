@@ -1,0 +1,8 @@
+{
+  "name": "Copy of المجال الإلكترونية",
+  "description": "المنصة الشاملة للخدمات الرقمية والأمنية وتوثيق الحسابات والحلول التقنية المتقدمة.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
